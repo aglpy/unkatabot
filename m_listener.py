@@ -12,8 +12,8 @@ def listener(messages):
 				mensaje = str(m.chat.first_name) + "(" + str(cid) + ")" + str(m.text)
 			else:
 				uid = m.from_user.id
-				mensaje = str(m.chat.first_name).encode("utf-8") + "-" + str(m.from_user.first_name).encode("utf-8") 
-				mensaje += "(" + str(cid) + "*" + str(uid) + ")" + str(m.text).encode("utf-8")
+				mensaje = str(m.chat.first_name) + "-" + str(m.from_user.first_name)
+				mensaje += "(" + str(cid) + "*" + str(uid) + ")" + str(m.text)
 			with open(reg_arch,"a") as arch:
 				arch.write(mensaje + "\n")	
 			print(mensaje)					

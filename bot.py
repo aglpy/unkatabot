@@ -6,6 +6,7 @@ from m_token import bot
 from m_listener import listener, reg_arch
 
 from comandos.m_kyu import command_kyu
+from comandos.m_almuerzo import command_almuerzo
 
 mi_id = ##
 

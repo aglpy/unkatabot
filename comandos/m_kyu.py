@@ -12,10 +12,13 @@ opts = "&beta=false&order_by=popularity+desc"
 def command_kyu(m):
 	try:
 		cid = m.chat.id
-		body = BeautifulSoup(leerweb(f"{codewars}{search}{level_ref}{m.text.split()[1]}{opts}"),"lxml")
-		cats = [cat.find("a")["href"] for cat in body.find_all(attrs={"class":"pvx"})]
-		body = BeautifulSoup(leerweb(f"{codewars}{search}{choice(cats)}"),"lxml")
-		katas = [kata.find("a")["href"] for kata in body.find_all(attrs={"class":"list-item kata"})]
-		bot.send_message(cid, f"{codewars}{choice(katas)}")
+		mensaje = ""
+		for i in m.text.split()[1:]:	
+			body = BeautifulSoup(leerweb(f"{codewars}{search}{level_ref}{i}{opts}"),"lxml")
+			cats = [cat.find("a")["href"] for cat in body.find_all(attrs={"class":"pvx"})]
+			body = BeautifulSoup(leerweb(f"{codewars}{search}{choice(cats)}"),"lxml")
+			katas = [kata.find("a")["href"] for kata in body.find_all(attrs={"class":"list-item kata"})]
+			mensaje += f"{i}kyu: {codewars}{choice(katas)}\n\n"
+		bot.send_message(cid, mensaje)
 	except:
 		pass

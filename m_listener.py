@@ -2,9 +2,12 @@ import telebot
 from telebot import types
 from m_token import bot
 
+from errores import error
+
 reg_arch = "./datos/registro.txt"
 
 def listener(messages):
+	#Guarda mensajes--------------------------------------------------------------------------------------------------------------------------
 	try:
 		for m in messages:
 			cid = m.chat.id
@@ -18,4 +21,7 @@ def listener(messages):
 				arch.write(mensaje + "\n")	
 			print(mensaje)					
 	except:
-		pass
+		try:
+			error(sys.exc_info()[0],"listener")
+		except:
+			error(None, "listener")

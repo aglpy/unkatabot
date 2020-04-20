@@ -8,12 +8,13 @@ props = "&phrase=milkshake&sort=mostpopular"
 
 @bot.message_handler(commands=["batido"])		
 def command_batido(m):
-	while True:
+	for _ in range(3):
 		try:
+			print('trying batido...')
 			cid = m.chat.id
 			body = BeautifulSoup(leerweb(f"{web}{randint(1,100)}{props}"),"lxml")
 			images = body.find_all("article")
-			bot.send_photo(cid, choice(images)["data-thumb-url"])
+			bot.send_photo(cid, choice(images).find('img')["src"])
 		except:
 			pass
 		else:
